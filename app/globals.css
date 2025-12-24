@@ -1,0 +1,259 @@
+/* Tailwind CSSの基本設定を読み込みます。
+   新しいTailwind v4の構文です。 */
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* 農場ゲーム用のテーマカラーに変更 - 温かみのある土色と緑をベースに */
+/* CSS変数（カスタムプロパティ）の定義
+   :root はHTMLドキュメントのルート（全体）を指します。
+   ここで定義した変数は、アプリ全体で var(--variable-name) として使えます。
+   
+   oklch(...) は、新しい色指定の形式です。
+   色相・鮮やかさ・明るさを人間が感じるままに直感的に指定できるため、
+   アクセシビリティ（見やすさ）の良い配色を作るのに向いています。 */
+:root {
+  --background: oklch(0.98 0.01 90);
+  --foreground: oklch(0.25 0.04 50);
+  /* ...その他テーマカラー定義... */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.25 0.04 50);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.25 0.04 50);
+  --primary: oklch(0.55 0.15 145);
+  --primary-foreground: oklch(0.98 0 0);
+  --secondary: oklch(0.85 0.08 80);
+  --secondary-foreground: oklch(0.35 0.05 50);
+  --muted: oklch(0.94 0.02 90);
+  --muted-foreground: oklch(0.5 0.03 50);
+  --accent: oklch(0.7 0.18 55);
+  --accent-foreground: oklch(0.2 0.05 50);
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.88 0.03 85);
+  --input: oklch(0.92 0.02 85);
+  --ring: oklch(0.55 0.15 145);
+  --chart-1: oklch(0.55 0.15 145);
+  --chart-2: oklch(0.7 0.18 55);
+  --chart-3: oklch(0.6 0.15 220);
+  --chart-4: oklch(0.75 0.12 30);
+  --chart-5: oklch(0.5 0.1 280);
+  --radius: 0.75rem;
+  --sidebar: oklch(0.96 0.02 85);
+  --sidebar-foreground: oklch(0.25 0.04 50);
+  --sidebar-primary: oklch(0.55 0.15 145);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-accent: oklch(0.9 0.04 80);
+  --sidebar-accent-foreground: oklch(0.25 0.04 50);
+  --sidebar-border: oklch(0.88 0.03 85);
+  --sidebar-ring: oklch(0.55 0.15 145);
+
+  /* ゲーム用カスタムカラー */
+  --farm-soil: oklch(0.45 0.08 50);
+  --farm-grass: oklch(0.65 0.18 140);
+  --farm-water: oklch(0.65 0.12 230);
+  --farm-gold: oklch(0.8 0.15 85);
+  --farm-wood: oklch(0.5 0.1 60);
+}
+
+.dark {
+  --background: oklch(0.18 0.02 50);
+  --foreground: oklch(0.95 0.01 90);
+  --card: oklch(0.22 0.02 50);
+  --card-foreground: oklch(0.95 0.01 90);
+  --popover: oklch(0.22 0.02 50);
+  --popover-foreground: oklch(0.95 0.01 90);
+  --primary: oklch(0.65 0.15 145);
+  --primary-foreground: oklch(0.15 0.02 50);
+  --secondary: oklch(0.3 0.04 50);
+  --secondary-foreground: oklch(0.95 0.01 90);
+  --muted: oklch(0.3 0.03 50);
+  --muted-foreground: oklch(0.7 0.02 90);
+  --accent: oklch(0.6 0.15 55);
+  --accent-foreground: oklch(0.95 0.01 90);
+  --destructive: oklch(0.5 0.2 25);
+  --destructive-foreground: oklch(0.95 0.01 90);
+  --border: oklch(0.3 0.03 50);
+  --input: oklch(0.3 0.03 50);
+  --ring: oklch(0.65 0.15 145);
+  --chart-1: oklch(0.65 0.15 145);
+  --chart-2: oklch(0.6 0.15 55);
+  --chart-3: oklch(0.55 0.12 220);
+  --chart-4: oklch(0.7 0.1 30);
+  --chart-5: oklch(0.55 0.08 280);
+  --sidebar: oklch(0.22 0.02 50);
+  --sidebar-foreground: oklch(0.95 0.01 90);
+  --sidebar-primary: oklch(0.65 0.15 145);
+  --sidebar-primary-foreground: oklch(0.15 0.02 50);
+  --sidebar-accent: oklch(0.3 0.03 50);
+  --sidebar-accent-foreground: oklch(0.95 0.01 90);
+  --sidebar-border: oklch(0.3 0.03 50);
+  --sidebar-ring: oklch(0.65 0.15 145);
+
+  /* ゲーム用カスタムカラー（ダークモード） */
+  --farm-soil: oklch(0.35 0.06 50);
+  --farm-grass: oklch(0.5 0.14 140);
+  --farm-water: oklch(0.5 0.1 230);
+  --farm-gold: oklch(0.7 0.12 85);
+  --farm-wood: oklch(0.4 0.08 60);
+}
+
+@theme inline {
+  --font-sans: "Geist", "Geist Fallback";
+  --font-mono: "Geist Mono", "Geist Mono Fallback";
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* ゲーム用カスタムカラーをTailwindに追加 */
+  --color-farm-soil: var(--farm-soil);
+  --color-farm-grass: var(--farm-grass);
+  --color-farm-water: var(--farm-water);
+  --color-farm-gold: var(--farm-gold);
+  --color-farm-wood: var(--farm-wood);
+}
+
+/* @layer ベーススタイル
+   HTML要素のデフォルトスタイルを上書きします。
+   @apply ディレクティブを使って、Tailwindのクラスを適用しています。 */
+@layer base {
+  * {
+    /* すべての要素に、枠線の色とアウトラインの色を設定 */
+    @apply border-border outline-ring/50;
+  }
+  body {
+    /* body全体に背景色と文字色を設定 */
+    @apply bg-background text-foreground;
+  }
+}
+
+/* ゲーム用アニメーション追加 */
+@keyframes bounce-slow {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.8);
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-2px);
+  }
+  75% {
+    transform: translateX(2px);
+  }
+}
+
+@keyframes grow {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* 動物用アニメーション追加 */
+@keyframes peck {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(0deg) translateY(2px);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-3px) scale(1.02);
+  }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 1.5s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-shake {
+  animation: shake 0.3s ease-in-out;
+}
+
+.animate-grow {
+  animation: grow 0.5s ease-out forwards;
+}
+
+/* 動物用アニメーションクラス追加 */
+.animate-peck {
+  animation: peck 0.8s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 2.5s ease-in-out infinite;
+}
